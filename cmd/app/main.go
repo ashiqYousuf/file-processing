@@ -77,5 +77,5 @@ func main() {
 		}
 	}
 
-	fmt.Println("took", time.Since(start).Seconds(), "milliseconds")
+	fmt.Println("took", time.Since(start).Minutes(), "minutes")
 }
