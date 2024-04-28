@@ -57,15 +57,10 @@ func searchTree(dir string) (results, error) {
 	return hashes, nil
 }
 
-func main() {
-	if len(os.Args) < 2 {
-		log.Fatal("Missing parameter, provide dir name!")
-
-	}
-
+func sequentialFileProcessing(filePath string) {
 	start := time.Now()
 
-	if hashes, err := searchTree(os.Args[1]); err == nil {
+	if hashes, err := searchTree(filePath); err == nil {
 		for hash, files := range hashes {
 			if len(files) > 1 {
 				fmt.Println(hash[len(hash)-7:], len(files))
@@ -77,5 +72,13 @@ func main() {
 		}
 	}
 
-	fmt.Println("took", time.Since(start).Minutes(), "minutes")
+	fmt.Println("took", time.Since(start).Seconds(), "seconds")
+}
+
+func main() {
+	if len(os.Args) < 2 {
+		log.Fatal("Missing parameter, provide dir name!")
+	}
+
+	sequentialFileProcessing(os.Args[1])
 }
